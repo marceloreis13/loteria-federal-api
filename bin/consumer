@@ -1,0 +1,47 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../bootstrap.php';
+
+use LoteriaApi\Config,
+    LoteriaApi\Consumer\Download,
+    LoteriaApi\Consumer\Extract,
+    LoteriaApi\Consumer\Writer,
+    LoteriaApi\Consumer\Reader,
+    Kodify\DownloaderBundle\Service\Downloader,
+    VIPSoft\Unzip\Unzip;    
+
+$config = (new Config)
+    ->setApiPath(API_PATH)
+    ->setDirectory('etc')
+    ->setExt('ini');
+
+$paths = $config
+    ->setFileName('path')
+    ->getData();
+
+$datasources = $config
+    ->setFileName('datasource')
+    ->getData();
+
+(new Download)
+    ->setComponent(new Downloader)
+    ->setDataSource($datasources)
+    ->setLocalStorage($paths['path']['zip'])
+    ->run();
+
+(new Extract)
+    ->setComponent(new Unzip)
+    ->setDataSource($datasources)
+    ->setPathsStorage($paths)    
+    ->run();
+
+$data = (new Reader)
+    ->setDataSource($datasources)
+    ->setPathsStorage($paths) 
+    ->getData();
+
+(new Writer)
+    ->setDataSource($datasources)
+    ->setLocalStorage($paths['path']['xml'])
+    ->setData($data)    
+    ->run();

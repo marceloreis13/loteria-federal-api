@@ -1,0 +1,32 @@
+{
+    "name": "marceloreis13/loteria-federal-api",
+    "description": "Api que fornece dados da loteria federal brasileira",
+    "keywords": ["loteria", "api"],
+    "authors": [
+        {
+            "name": "Marcelo Reis",
+            "email": "me@marcelo.cc"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "silex/silex": "1.0.*@dev",
+        "kodify/downloader": "dev-master",
+        "vipsoft/unzip": "dev-master"
+    },
+    "require-dev": {
+        "symfony/browser-kit": ">=2.3,<2.4-dev",        
+        "digitalkaoz/yuml-php":  ">=0.3",
+        "pdepend/pdepend": "*",
+        "sebastian/phpcpd": "*",
+        "phpmd/phpmd": "*",
+        "phploc/phploc": "*",
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "4.0.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "" : "src/" 
+        }
+    }
+}

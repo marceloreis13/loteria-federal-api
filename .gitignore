@@ -1,0 +1,9 @@
+/.vagrant
+/vendor
+/nbproject
+/var/_reports
+/var/ext
+/var/xml
+/var/zip
+/composer.lock
+/composer.phar
