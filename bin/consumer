@@ -45,3 +45,34 @@ $data = (new Reader)
     ->setLocalStorage($paths['path']['xml'])
     ->setData($data)    
     ->run();
+
+
+// Live
+echo "Live consumer\n";
+$command = "/var/loteca/api/bin/consumerLive > /var/loteca/api/output-consumerLive";
+$sh = shell_exec($command);
+
+
+
+// Firebase Sync
+$dirNode = dirname(dirname(__DIR__)) . '/firebase';    
+
+// Megasena
+echo "[MEGASENA] - synchronized\n";
+$command = "node {$dirNode}/firebase-sync.js --lotteryID=HfHSNnfg8r382cFecfTG";
+$sh = shell_exec($command);
+
+// Lotofacil
+echo "[LOTOFACIL] - synchronized\n";
+$command = "node {$dirNode}/firebase-sync.js --lotteryID=x7pyz2L6L2wXwigFVU7Q";
+$sh = shell_exec($command);
+
+// Quina
+echo "[QUINA] - synchronized\n";
+$command = "node {$dirNode}/firebase-sync.js --lotteryID=bZ4x01G1jXQ2dtf8WenQ";
+$sh = shell_exec($command);
+
+// Lotomania
+echo "[LOTOMANIA] - synchronized\n";
+$command = "node {$dirNode}/firebase-sync.js --lotteryID=2i35qZTwSPKPQgJzQra6";
+$sh = shell_exec($command);
