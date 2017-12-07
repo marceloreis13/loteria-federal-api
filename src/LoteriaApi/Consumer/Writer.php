@@ -2,11 +2,11 @@
 
 namespace LoteriaApi\Consumer;
 
-class Writer
-{
+class Writer {
     private $datasource;
     private $localstorage;
     private $data;
+    private $filename;
     
     public function setDataSource(array $datasource)
     {
@@ -64,25 +64,28 @@ class Writer
         }
     }
 
-    private function getSimpleXml($filename)
+    private function getSimpleXml()
     {
-        return simplexml_load_file($filename);
+        return simplexml_load_file($this->filename);
     }
 
    public function runLive() {
         foreach ($this->datasource as $concursoName => $concurso) {
 
             // File of oldest consursos
-            $filename = $this->localstorage . $concurso['xml'];
+            $this->filename = $this->localstorage . $concurso['xml'];
             
+            // Create new xml content
             $xml = new \SimpleXMLElement('<concursos/>');
-            // Start XML form oldest concursos
-            if (is_file($filename)) {
-                $xml = new \SimpleXMLElement($filename, null, true);
+
+            // Start XML from oldest concursos
+            if (is_file($this->filename)) {
+                $xml = $this->getSimpleXml();
             }
-            
+
             foreach ($this->data[$concursoName] as $nrconcurso => $concursoData) {
-                if (is_numeric($nrconcurso)) {
+
+                if (is_numeric($nrconcurso) && !$this->concursoExists($nrconcurso)) {
                     $concursoXml = $xml->addChild('concurso');
                     $concursoXml->addAttribute('numero', $nrconcurso);
                     $concursoXml->addChild('data', $concursoData['data']);
@@ -107,7 +110,13 @@ class Writer
             $dom->preserveWhiteSpace = false;
             $dom->formatOutput = true;
             $dom->loadXML($xml->asXML());
-            $dom->save($filename);
+            $dom->save($this->filename);
         }
+    }
+
+    private function concursoExists($nrconcurso) {
+        $concurso = $this->getSimpleXml()->xpath("/concursos/concurso[@numero='{$nrconcurso}']");
+
+        return isset($concurso[0]);
     }
 }
