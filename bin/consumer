@@ -51,12 +51,6 @@ print_r("##### - Writing files - #####\n");
     ->run();
 
 
-// Live
-echo "Live consumer\n";
-$command = "/var/loteca/api/bin/consumerLive > /var/loteca/api/output-consumerLive";
-$sh = shell_exec($command);
-
-
 
 // Firebase Sync
 $dirNode = dirname(dirname(__DIR__)) . '/firebase';    
