@@ -35,9 +35,9 @@ abstract class AbstractReaderHtmlLoteria implements IReaderHtml
         for ($concursoHtml = 1; $concursoHtml < $trs->length; $concursoHtml++) {
             $tds = $trs->item($concursoHtml)->getElementsByTagName('td');
             
-            $nrconcurso = $tds->item($numbersNode->getNumberConcurso())->nodeValue;
+            $nrconcurso = isset($tds->item($numbersNode->getNumberConcurso())->nodeValue) ? $tds->item($numbersNode->getNumberConcurso())->nodeValue : "";
 
-            $data = $tds->item($numbersNode->getDataConcurso())->nodeValue;
+            $data = isset($tds->item($numbersNode->getDataConcurso())->nodeValue) ? $tds->item($numbersNode->getDataConcurso())->nodeValue : "";
             $dezenas = $this->loadDezenas($numbersNode, $tds);
             $arrecadacao = isset($tds->item($numbersNode->getArrecadacaoConcurso())->nodeValue) ? $tds->item($numbersNode->getArrecadacaoConcurso())->nodeValue : "";
             $totalGanhadoresPrimeiroPremio = isset($tds->item($numbersNode->getTotalGanhadoresPrimeiroPremio())->nodeValue) ? $tds->item($numbersNode->getTotalGanhadoresPrimeiroPremio())->nodeValue : "";
