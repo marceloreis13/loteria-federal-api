@@ -74,10 +74,18 @@ abstract class AbstractXmlLoteria implements IFinder
         $rangeEnd = $lastConcurso['concurso'];
 
         foreach (range($rangeIni, $rangeEnd) as $nrconcurso) {
-            $concursos[] = $this->findByConcurso($nrconcurso);
+            if ($this->concursoExists($nrconcurso)) {
+                $concursos[] = $this->findByConcurso($nrconcurso);
+            }
         }
 
         return $concursos;
+    }
+
+    private function concursoExists($nrconcurso) {
+        $concurso = $this->getSimpleXml()->xpath("/concursos/concurso[@numero='{$nrconcurso}']");
+
+        return isset($concurso[0]);
     }
 
     public function findLastConcurso()
