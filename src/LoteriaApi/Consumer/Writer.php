@@ -30,6 +30,8 @@ class Writer {
     {
         foreach ($this->datasource as $concursoName => $concurso) {
             
+            echo "[{$concurso['name']}] - writing " . count($this->data[$concursoName]) . " concursos...\n";
+            
             $xml = new \SimpleXMLElement('<concursos/>');
             
             foreach ($this->data[$concursoName] as $nrconcurso => $concursoData) {

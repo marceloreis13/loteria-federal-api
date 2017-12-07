@@ -23,23 +23,27 @@ $datasources = $config
     ->setFileName('datasource')
     ->getData();
 
+print_r("##### - Downloading files - #####\n");
 (new Download)
     ->setComponent(new Downloader)
     ->setDataSource($datasources)
     ->setLocalStorage($paths['path']['zip'])
     ->run();
 
+print_r("##### - Extracting files - #####\n");
 (new Extract)
     ->setComponent(new Unzip)
     ->setDataSource($datasources)
     ->setPathsStorage($paths)    
     ->run();
 
+print_r("##### - Reading files - #####\n");
 $data = (new Reader)
     ->setDataSource($datasources)
     ->setPathsStorage($paths) 
     ->getData();
 
+print_r("##### - Writing files - #####\n");
 (new Writer)
     ->setDataSource($datasources)
     ->setLocalStorage($paths['path']['xml'])

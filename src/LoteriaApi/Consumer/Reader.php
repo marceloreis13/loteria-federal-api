@@ -30,6 +30,9 @@ class Reader
         $internalErrors = libxml_use_internal_errors(true);
 
         foreach ($this->datasource as $concursoName => $concursoData) {
+            
+            echo "[{$concursoData['name']}] - reading HTML file...\n";
+            
             $file = $this->paths['path']['ext'].$concursoData['html'];
             $doc = new DOMDocument();
             $doc->loadHTMLFile($file);

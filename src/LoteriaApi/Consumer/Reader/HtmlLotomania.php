@@ -28,7 +28,7 @@ class HtmlLotomania extends AbstractReaderHtmlLoteria
         return $this->data;
     }
 
-        public function getDataLive() {
+    public function getDataLive() {
 
         // Instance for query
         $finder = new DomXPath($this->domdocument);        
