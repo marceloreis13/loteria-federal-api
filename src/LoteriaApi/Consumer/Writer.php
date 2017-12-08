@@ -31,7 +31,7 @@ class Writer {
         foreach ($this->datasource as $concursoName => $concurso) {
             
             echo "[{$concurso['name']}] - writing " . count($this->data[$concursoName]) . " concursos...\n";
-            
+
             $xml = new \SimpleXMLElement('<concursos/>');
             
             foreach ($this->data[$concursoName] as $nrconcurso => $concursoData) {
@@ -87,6 +87,7 @@ class Writer {
 
             foreach ($this->data[$concursoName] as $nrconcurso => $concursoData) {
 
+                // Prevent adding same concurso in XML file
                 if (is_numeric($nrconcurso) && !$this->concursoExists($nrconcurso)) {
                     $concursoXml = $xml->addChild('concurso');
                     $concursoXml->addAttribute('numero', $nrconcurso);
