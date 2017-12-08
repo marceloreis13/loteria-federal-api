@@ -31,7 +31,9 @@ abstract class AbstractReaderHtmlLoteria implements IReaderHtml
     {
         $table = $this->domdocument->getElementsByTagName('table')->item(0);
         $trs = $table->getElementsByTagName('tr');
-
+        
+        echo "Processing {$trs->length} concursos\n";
+        
         for ($concursoHtml = 1; $concursoHtml < $trs->length; $concursoHtml++) {
             $tds = $trs->item($concursoHtml)->getElementsByTagName('td');
             

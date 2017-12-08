@@ -31,7 +31,7 @@ class Reader
 
         foreach ($this->datasource as $concursoName => $concursoData) {
             
-            echo "[{$concursoData['name']}] - reading HTML file...\n";
+            echo "[{$concursoData['name']}] - reading HTML file | ";
             
             $file = $this->paths['path']['ext'].$concursoData['html'];
             $doc = new DOMDocument();
