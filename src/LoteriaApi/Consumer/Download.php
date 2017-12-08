@@ -43,7 +43,7 @@ class Download
     {
         foreach ($this->datasource as $concurso) {
             $this->component->downloadFile(
-                $concurso['urlLive'],
+                $concurso['live'],
                 $this->localstorage,
                 $concurso['html']
             );

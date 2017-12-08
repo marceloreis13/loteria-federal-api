@@ -31,6 +31,8 @@ class Extract
     public function run()
     {
         foreach ($this->datasource as $concurso) {
+            $ppp = $this->paths['path']['zip'] . DS . $concurso['zip'];
+            echo "extract from: {$ppp} to: {$this->paths['path']['ext']}\n";
             $this->component->extract(
                 $this->paths['path']['zip'] . DS . $concurso['zip'],
                 $this->paths['path']['ext']
