@@ -29,11 +29,11 @@ class Reader
         // set error level
         $internalErrors = libxml_use_internal_errors(true);
 
-        foreach ($this->datasource as $concursoName => $concursoData) {
-            
-            echo "[{$concursoData['name']}] - reading HTML file | ";
-            
+        foreach ($this->datasource as $concursoName => $concursoData) {            
             $file = $this->paths['path']['ext'].$concursoData['html'];
+
+            echo "[{$concursoData['name']}] - reading HTML file from {$file} | ";
+
             $doc = new DOMDocument();
             $doc->loadHTMLFile($file);
             $data[$concursoName] = (new $concursoData['reader'])
